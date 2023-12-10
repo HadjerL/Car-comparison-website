@@ -1,0 +1,74 @@
+:root{
+    --orange: #be5c2b;
+    --light-gray: #e6e6e6;
+    --very-dark-blue: #1f2022;
+    --dark-gray: #808080;
+    --white: #edf5f0;
+}
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: 'Rubik';
+    background-color: var(--light-gray);
+    padding: 5%;
+}
+nav{
+    background-image: url('./assets/background/narrow-curvy-road-with-cars-alongside-green-mountains.jpg');
+    object-fit: cover;
+    background-size: cover;
+    padding: 30px;
+}
+nav{
+    display: flex;
+    flex-direction: column;
+}
+nav i{
+    color: var(--very-dark-blue);
+}
+nav ul{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    padding: 20px;
+}
+nav ul.menu{
+    background-color: transparent;
+    border: 2px var(--white) solid;
+    margin: 70px;
+}
+nav ul.menu li a{
+    color: var(--white);
+}
+nav ul li{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+    color: var(--very-dark-blue);
+}
+.first-menu{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.logo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: var(--white);
+}
+.logo i{
+    color: var(--white)
+}
+.social-menu{
+    display: flex;
+    flex-direction: row;
+
+}
