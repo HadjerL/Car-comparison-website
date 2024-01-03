@@ -105,10 +105,19 @@ class View{
         $this->showNavLarge();
         echo "</header>";
     }
+    private function showComparingFrame(){
+        ?>
+        
+        <?php
+    }
+    private function showMain(){
+        $this->showComparingFrame();
+    }
     private function pageBody(){
         echo "<body>";
         $this->showHeader();
         $this->showDiaporama();
+        $this->showMain();
         ?>
         <script src="jquery-3.7.1.js" type="text/javascript"></script>
         <script src="index.js" type="text/javascript"></script>
