@@ -1,4 +1,4 @@
-/* :root{
+:root{
     --orange: #be5c2b;
     --light-gray: #e6e6e6;
     --very-dark-blue: #1f2022;
@@ -71,9 +71,7 @@ a{
     display: flex;
     flex-direction: row;
 
-} */
-
-* {box-sizing:border-box}
+}
 
 /* Slideshow container */
 .slideshow-container {

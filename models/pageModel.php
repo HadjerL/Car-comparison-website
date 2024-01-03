@@ -43,5 +43,19 @@ class PageModel extends Model{
         $this->disconect($conn);
         return $result;
     }
+    public function getDiaporama($id_website){
+        $conn = $this->connect($this->getDbName(), $this->getHost(), $this->getUser(), $this->getPassword());
+        $query = "SELECT * FROM `diaporama` WHERE id_website = $id_website";
+        $result = $this ->request($conn,$query);
+        $this->disconect($conn);
+        return $result[0]["id_diaporama"];
+    }
+    public function getDiaporamaItems($id_diaporama){
+        $conn = $this->connect($this->getDbName(), $this->getHost(), $this->getUser(), $this->getPassword());
+        $query = "SELECT * FROM `diaporam_items` WHERE id_diaporama = $id_diaporama";
+        $result = $this->request($conn, $query);
+        $this->disconect($conn);
+        return $result;
+    }
 }
 ?>

@@ -32,6 +32,18 @@ class Controller{
         $result = $page->getSocialItems($id_socials);
         return $result;
     }
+    protected function getDiaporamaController(){
+        $page = new PageModel();
+        $id_website = $page->getWebsite("Markaba");
+        $result = $page->getDiaporama($id_website);
+        return $result;
+    }
+    public function getDiaporamaItemsController(){
+        $page = new PageModel();
+        $id_diaporama = $this->getDiaporamaController();
+        $result = $page->getDiaporamaItems($id_diaporama);
+        return $result;
+    }
     public function showWebsite(){
         $page_view = new View();
         return $page_view->showWebsite();
