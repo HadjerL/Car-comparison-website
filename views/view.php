@@ -2,16 +2,19 @@
 require_once('./controller/controller.php');
 class View{
     private function pageHead(){
+        $page_controller = new Controller();
+        $logo_link = $page_controller->getLogoController();
         ?>
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <script src="https://kit.fontawesome.com/7c073a6778.js" crossorigin="anonymous"></script>
-            <link rel="stylesheet" href="styles.css">
+            <link rel="stylesheet" href="style.css">
             <link rel="preconnect" href="https://fonts.googleapis.com">
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
             <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet">
-            <title>Karroussa</title>
+            <link rel="icon" type="image/png" href=<?php echo "\"$logo_link\""; ?>>
+            <title>Markaba</title>
         </head>
         <?php
     }
@@ -99,19 +102,76 @@ class View{
         echo"</nav>";
     }
     private function showHeader(){
-        echo "<header>";
+        echo "<header class=\"header-page\">";
         $this->showLogo();
         $this->showNavSmall();
         $this->showNavLarge();
         echo "</header>";
     }
     private function showComparingFrame(){
+        $comparator_controller = new Controller();
+        $vehicule_types = $comparator_controller->getVehiculeTypesController();
+        $car_figures = ["assets/cars/car one.png","assets/cars/car two.png"];
+
         ?>
-        
+        <section class="comparison  ">
+            <header class="header-compare">
+                <h2 class="section-title">Compare cars</h2>
+                <p>Choose two cars to compare side-by-side.</p>
+            </header>
+            <div class="comparison-box">
+                <?php 
+                for($i=0;$i<4;$i++){
+                ?>
+                <div class="form-box">
+                    <div class="compr-img-cntner">
+                        <img class="compr-img" src="<?php echo $car_figures[$i%2]; ?>" alt="car figure" style = "transform:scaleX(<?php if($i%2 ==1) {echo 1;} else {echo -1;}?>)";> <!--if i is pair it's gonna be flipped-->
+                    </div>
+                    <h3>Select a Vehicule</h3>
+                    <form class="comparison-form" action="">
+                    <div class="input-container">
+                            <label for="Type">Type</label>
+                            <select name="Type" id="Type">
+                                <option value selected>Choose a Type</option>
+                                <?php 
+                                foreach($vehicule_types as $type){
+                                    $type_name = $type["type_name"];
+                                    echo "<option value= \"$type_name\">$type_name</option>";
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="input-container">
+                            <label for="make">Make</label>
+                            <select name="make" id="make">
+                                <option value selected>Choose a make</option>
+                            </select>
+                        </div>
+                        <div class="input-container">
+                            <label for="model">Model</label>
+                            <select name="model" id="model">
+                            <option value selected>Choose a model</option>
+                            </select>
+                        </div>
+                        <div class="input-container">
+                            <label for="year">Year</label>
+                            <select name="year" id="year">
+                            <option value selected>Choose a Year</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <?php
+                }
+                ?>
+            </div>
+        </section>
         <?php
     }
     private function showMain(){
+        echo "<main>";
         $this->showComparingFrame();
+        echo "</main>";
     }
     private function pageBody(){
         echo "<body>";

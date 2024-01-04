@@ -5,8 +5,8 @@
     --light-gray: hsl(0, 0%, 90%);
     --very-dark-blue: #1f2124;
     --dark-gray: #808080;
-    --white: #edf5f0;
-    --transparent-dark-blue:hsla(220, 5%, 13%,70%)
+    --white: #fdfffe;
+    --transparent-dark-blue: hsla(220, 5%, 13%,70%)
 }
 *{
     padding: 0;
@@ -19,11 +19,13 @@ body{
     padding: 0 5%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    /* align-items: center; */
     gap: 2rem;
 }
 header{
     width: 100%;
+}
+header.header-page{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -163,6 +165,79 @@ header nav ul.nav-menu li a:hover::after{
     animation-fill-mode: forwards;
     animation-duration: .5s;
 }
+main{
+    color: var(--very-dark-blue);
+}
+section.comparison{
+    padding: 2rem 0;
+}
+h2{
+    font-size: 1.75rem;
+}
+div.comparison-box{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 2rem 1rem;
+}
+div.form-box{
+    background-color: var(--white);
+    border-radius: 5px;
+    padding: 1rem;
+    border-bottom: var(--orange) 2px solid;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+div.form-box img{
+    width: 100%;
+    position: relative;
+    z-index:1;
+}
+div.form-box div.compr-img-cntner{
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+div.form-box div.compr-img-cntner::after{
+    position: absolute;
+    bottom: 0;
+    left: -1rem;
+    z-index: 0;
+    display: block;
+    content: '';
+    width: calc(100% + 2rem);
+    height: 55px;
+    background-color: var(--orange);
+}
+div.form-box form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+div.input-container{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    max-width: 503px;
+    border: var(--dark-gray) 1px solid;
+    border-radius: 5px;
+    padding: .5rem;
+}
+div.input-container select{
+    cursor: pointer;
+    border: none;
+    color: var(--very-dark-blue);
+}
+div.input-container select:focus{
+    outline: none;
+    border-bottom: var(--dark-gray) 2px solid;
+    border-radius: 3px;
+}
+form.comparison-form label{
+    font-size: .75rem;
+    color: var(--dark-gray);
+} 
 @keyframes fade {
     0% {
         transform: translateX(100%);
@@ -175,7 +250,7 @@ header nav ul.nav-menu li a:hover::after{
     body{
         padding: 2rem 4rem;
     }
-    header{
+    header.header-page{
         padding: 20px 90px;
     }
     header img.logo{

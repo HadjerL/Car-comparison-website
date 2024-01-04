@@ -22,4 +22,22 @@ $(function(){
         dots[slideIndex-1].classList.add("active");
         setTimeout(showSlides, 2000);
     }
+
+    //-----------------------------------------------------------------------------
+    // Function to update make options based on selected type
+    function updateMakes() {
+        const type = document.getElementById("type").value;
+        const makeSelect = document.getElementById("make");
+        makeSelect.innerHTML = "<option value=''>Select Make</option>"; // Clear existing options
+        // Fetch make options from the server using AJAX
+        fetch('getData.php?type=' + type)
+            .then(response => response.text())
+            .then(data => {
+                makeSelect.innerHTML += data; // Append retrieved options to the select element
+            });
+        }
+      // Event listener to trigger updating of make options
+        document.getElementById("type").addEventListener("change", updateMakes);
+      // Initial population of make options based on default type
+        updateMakes();
 })    

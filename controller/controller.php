@@ -1,5 +1,6 @@
 <?php
 require_once('./models/pageModel.php');
+require_once('./models/comparatorModel.php');
 require_once('./views/view.php');
 class Controller{
     public function getLogoController(){
@@ -42,6 +43,11 @@ class Controller{
         $page = new PageModel();
         $id_diaporama = $this->getDiaporamaController();
         $result = $page->getDiaporamaItems($id_diaporama);
+        return $result;
+    }
+    public function getVehiculeTypesController(){
+        $comparator = new ComparatorModel();
+        $result = $comparator->getVihiculeTypes();
         return $result;
     }
     public function showWebsite(){
