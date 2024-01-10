@@ -1,7 +1,7 @@
 <?php
-require_once('./models/pageModel.php');
-require_once('./models/comparatorModel.php');
-require_once('./views/view.php');
+require_once(__DIR__ . '/../models/comparatorModel.php');
+require_once(__DIR__ . '/../models/pageModel.php');
+require_once(__DIR__ . '/../views/view.php');
 class Controller{
     public function getLogoController(){
         $page = new pageModel();
@@ -48,6 +48,31 @@ class Controller{
     public function getVehiculeTypesController(){
         $comparator = new ComparatorModel();
         $result = $comparator->getVihiculeTypes();
+        return $result;
+    }
+    public function getMakesOfTypeController($vehicule_type){
+        $comparator = new ComparatorModel();
+        $result = $comparator->getMakesOfType($vehicule_type);
+        return $result;
+    }
+    public function getModelsOfMakeController($make_name){
+        $comparator = new ComparatorModel();
+        $result = $comparator->getModelsOfMake($make_name);
+        return $result;
+    }
+    public function getGenerationsOfModelController($model_name){
+        $comparator = new ComparatorModel();
+        $result = $comparator->getGenerationsOfModel($model_name);
+        return $result;
+    }
+    public function getYearsOfGenerationController($generation_name,$year_begin,$year_end){
+        $comparator = new ComparatorModel();
+        $result = $comparator->getYearsOfGeneration($generation_name,$year_begin,$year_end);
+        return $result;
+    }
+    public function getImageOfVehiculeController($type_name,$make_name,$model_name,$generation_name,$year_begin,$year_end,$year_name){
+        $comparator = new ComparatorModel();
+        $result = $comparator->getImageOfVehicule($type_name,$make_name,$model_name,$generation_name,$year_begin,$year_end,$year_name);
         return $result;
     }
     public function showWebsite(){

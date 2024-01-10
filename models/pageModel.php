@@ -1,9 +1,9 @@
 <?php
-require_once('./models/model.php');
+require_once(__DIR__ . '/../models/model.php');
 class PageModel extends Model{
     public function getWebsite($website_name){
         $conn = $this-> connect($this->getDbName(), $this->getHost(), $this->getUser(), $this->getPassword());
-        $query = "SELECT id_website FROM `website` WHERE website_name = \"Markaba\"";
+        $query = "SELECT id_website FROM `website` WHERE website_name = \"$website_name\"";
         $result = $this->request($conn, $query);
         $this->disconect($conn);
         return $result[0]["id_website"];
