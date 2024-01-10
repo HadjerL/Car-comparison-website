@@ -217,17 +217,97 @@ $(function(){
     updateImages("form-box1", "compr-img-cntner1");
     updateImages("form-box2", "compr-img-cntner2");
     updateImages("form-box3", "compr-img-cntner3");
-
+    function getData(id){
+        const year = $(`#vehicule-form${id} select[name^="year"]`).val();
+        const generationval = $(`#vehicule-form${id} select[name^="generation"]`).val();
+        const model = $(`#vehicule-form${id} select[name^="model"]`).val();
+        const make = $(`#vehicule-form${id} select[name^="make"]`).val();
+        const type = $(`#vehicule-form${id} select[name^="type"]`).val();
+        return {
+            type: type,
+            make: make,
+            model: model,
+            generation: generationval.slice(0,-12),
+            yearBegin: generationval.slice(-10,-6),
+            yearEnd: generationval.slice(-5,-1),
+            year: year
+        }
+    }
+    function isFilled(data){
+        const filled = Object.keys(data).every((key) => {
+            return data[key] !== '';
+        });
+        return filled;
+    }
+    function getFilledForms(){
+        const formnumbers = []
+        for(let i=0 ; i<4; i++){
+            if(isFilled(getData(i))){
+                formnumbers.push(i);
+            }
+        }
+        return formnumbers;
+    }
+    function getFormCombinations(forms) {
+        const combinations = [];
+        for (let i = 0; i < forms.length; i++) {
+            for (let j = i + 1; j < forms.length; j++) {
+                combinations.push([forms[i], forms[j]]);
+            }
+        }
+        return combinations;
+    }
+    function removeFirstAttribute(obj) {
+        const keys = Object.keys(obj);
+        const firstKey = keys[0];
+        delete obj[firstKey];
+        return obj;
+    }
+    function areDifferent(forms){
+        const data1 = removeFirstAttribute(getData(forms[0]))
+        const data2 = removeFirstAttribute(getData(forms[1]))
+        const different = Object.keys(data1).every((key) => {
+            return data1[key] !== data2[key];
+        });
+        return different;
+    }
+    function areAllDifferent(forms){
+        const allDifferent = forms.every((form)=>{
+            return areDifferent(form);
+        })
+        return allDifferent
+    }
+    function isFormValid() {
+        const filledForms = getFilledForms();
+        const allCombinations = getFormCombinations(filledForms);
+        const form = $(`#form-container`);
+        const errorMessage = $(`section.comparison div.error-message-container`)
+        if (filledForms.length < 2 || !areAllDifferent(allCombinations)) {
+            return false;
+        } else {
+            form.off('submit').submit();
+            errorMessage[0].classList.add('hidden');
+            form.css({
+                'border' : 'none'
+            })
+            return true;
+        }
+    }
     function compare(){
-        const year = $(`[id^="vehicule-form"] select[name^="year"]`);
-        const generationval = $(`[id^="vehicule-form"] select[name^="generation"]`);
-        const model = $(`[id^="vehicule-form"] select[name^="model"]`);
-        const make = $(`[id^="vehicule-form"] select[name^="make"]`);
-        const type = $(`[id^="vehicule-form"] select[name^="type"]`);
-        // const generation = generationval.slice(0,-12);
-        // const yearEnd = generationval.slice(-5,-1);
-        // const yearBegin = generationval.slice(-10,-6)
-        console.log(year,generationval,model,make,type)
+        const filledForms = getFilledForms();
+        const allCombinations = getFormCombinations(filledForms);
+        const form = $(`#form-container`);
+        const errorMessage = $(`section.comparison div.error-message-container`)
+        console.log(filledForms,allCombinations,areAllDifferent(allCombinations))
+        form.submit((event)=>{
+            if(!isFormValid()){
+                event.preventDefault();
+                errorMessage[0].classList.remove('hidden')
+                form.css({
+                    'border':'var(--red) 2px solid'
+                })
+            }
+        })
     }
     $(`section.comparison button`).on("click",compare)
 })    
@@ -245,5 +325,17 @@ id_make = (SELECT id_make FROM make where make_name = "BMW") and
 id_model = (SELECT id_model FROM model WHERE model_name = "2 serie") and
 id_generation = (SELECT id_generation FROM generation WHERE generation_name = "F22/F23" and year_begin = 2013 and year_end = 2017) and
 id_vehicule_type = (SELECT id_vehicule_type FROM vehicule_type WHERE type_name = "Car"); 
+*/
+
+/** 
+ * const year = $(`[id^="vehicule-form"] select[name^="year"]`);
+        const generationval = $(`[id^="vehicule-form"] select[name^="generation"]`);
+        const model = $(`[id^="vehicule-form"] select[name^="model"]`);
+        const make = $(`[id^="vehicule-form"] select[name^="make"]`);
+        const type = $(`[id^="vehicule-form"] select[name^="type"]`);
+        // const generation = generationval.slice(0,-12);
+        // const yearEnd = generationval.slice(-5,-1);
+        // const yearBegin = generationval.slice(-10,-6)
+        // console.log(year,generationval,model,make,type)
 */
 

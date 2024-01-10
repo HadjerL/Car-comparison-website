@@ -75,6 +75,11 @@ class Controller{
         $result = $comparator->getImageOfVehicule($type_name,$make_name,$model_name,$generation_name,$year_begin,$year_end,$year_name);
         return $result;
     }
+    public function getVehiculeController($type_name,$make_name,$model_name,$generation_name,$year_begin,$year_end,$year_name){
+        $comparator = new ComparatorModel();
+        $result = $comparator->getVehicule($type_name,$make_name,$model_name,$generation_name,$year_begin,$year_end,$year_name);
+        return $result;
+    }
     public function showWebsite(){
         $page_view = new View();
         return $page_view->showWebsite();

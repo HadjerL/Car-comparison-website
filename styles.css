@@ -6,7 +6,8 @@
     --very-dark-blue: #1f2124;
     --dark-gray: #808080;
     --white: #fdfffe;
-    --transparent-dark-blue: hsla(220, 5%, 13%,70%)
+    --transparent-dark-blue: hsla(220, 5%, 13%,70%);
+    --red: #ff3535;
 }
 *{
     padding: 0;
@@ -173,7 +174,7 @@ section.comparison{
     display: flex;
     flex-direction: column;
     align-items: center;
-    
+    gap: 1rem;
 }
 h2{
     font-size: 1.75rem;
@@ -256,7 +257,12 @@ form.form-container{
     display: flex;
     flex-direction: column;
     align-items: center;
-    
+    padding: 1rem 0;
+}
+.error-message{
+    color: var(--red);
+    text-align: center;
+    margin-top: 1rem;
 }
 
 @keyframes fade {
