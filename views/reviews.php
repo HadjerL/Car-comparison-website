@@ -1,7 +1,7 @@
 <?php
 require_once(__DIR__ . '/../controller/controller.php');
 require_once(__DIR__.'/common.php');
-class Makes{
+class Review{
     private function pageHead(){
         $page_controller = new Controller();
         $logo_link = $page_controller->getLogoController("black and orange");

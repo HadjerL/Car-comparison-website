@@ -3,10 +3,10 @@ require_once(__DIR__ . '/../models/comparatorModel.php');
 require_once(__DIR__ . '/../models/pageModel.php');
 require_once(__DIR__ . '/../views/view.php');
 class Controller{
-    public function getLogoController(){
+    public function getLogoController($type){
         $page = new pageModel();
         $id_website = $page->getWebsite("Markaba");
-        $result = $page->getLogo($id_website, "black and orange");
+        $result = $page->getLogo($id_website, $type);
         return $result[0]["logo_link"];
     }
     protected function getNavMenuController(){
@@ -80,9 +80,14 @@ class Controller{
         $result = $comparator->getVehicule($type_name,$make_name,$model_name,$generation_name,$year_begin,$year_end,$year_name);
         return $result;
     }
-    public function showWebsite(){
+    public function getSpecificationsValuesCntroller($id_vehicule){
+        $comparator = new ComparatorModel();
+        $result = $comparator->getSpecificationsValues($id_vehicule);
+        return $result;
+    }
+    public function showPage(){
         $page_view = new View();
-        return $page_view->showWebsite();
+        return $page_view->showPage();
     }
 }
 ?>

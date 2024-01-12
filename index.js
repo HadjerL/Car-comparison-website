@@ -285,7 +285,7 @@ $(function(){
         if (filledForms.length < 2 || !areAllDifferent(allCombinations)) {
             return false;
         } else {
-            form.off('submit').submit();
+            // form.off('submit').submit();
             errorMessage[0].classList.add('hidden');
             form.css({
                 'border' : 'none'
@@ -299,23 +299,37 @@ $(function(){
         const form = $(`#form-container`);
         const errorMessage = $(`section.comparison div.error-message-container`)
         console.log(filledForms,allCombinations,areAllDifferent(allCombinations))
-        form.submit((event)=>{
+        form.on('click',(event)=>{
             if(!isFormValid()){
-                event.preventDefault();
+                // event.preventDefault();
                 errorMessage[0].classList.remove('hidden')
                 form.css({
                     'border':'var(--red) 2px solid'
+                })
+            } else{
+                filledForms.forEach((form)=>{
+                    const data = getData(form);
+                    data.action = 'getVehicule';
+                    $.getJSON('./controller/formController.php', data)
+                    .done(function(data) {
+                        if(data.length != 0){
+                            data.unshift({form : form});
+                            console.log(data);
+                        } else{
+                            console.log('no data')
+                        }
+                    })
+                    .fail(function(jqxhr, textStatus, error) {
+                        var err = textStatus + ", " + error;
+                        console.error("Request Failed: " + err);
+                    });
                 })
             }
         })
     }
     $(`section.comparison button`).on("click",compare)
+
 })    
-
-
-
-
-
 
 
 /**
