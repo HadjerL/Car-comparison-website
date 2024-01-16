@@ -1,6 +1,7 @@
 <?php
 require_once(__DIR__ . '/../controller/controller.php');
 require_once(__DIR__ . '/../controller/vehiculeDetailController.php');
+require_once(__DIR__ . '/../controller/comparatorController.php');
 require_once(__DIR__.'/common.php');
 class ModelDetail{
     private function pageHead(){
@@ -10,7 +11,7 @@ class ModelDetail{
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <!-- <script src="https://kit.fontawesome.com/7c073a6778.js" crossorigin="anonymous"></script> -->
+            <script src="https://kit.fontawesome.com/7c073a6778.js" crossorigin="anonymous"></script>
             <link rel="stylesheet" href="/Car-comparison-website/index.css">
             <link rel="preconnect" href="https://fonts.googleapis.com">
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,10 +24,31 @@ class ModelDetail{
     private function showMain(){
         if(isset($_GET["id_vehicule"])){
             $id_vehicule = $_GET["id_vehicule"];
-            echo $id_vehicule
+            $vehicule_controller = new vehiculeDetailController();
+            $controller = new controller();
+            $vehicule = $vehicule_controller->getVehiculeController($id_vehicule);
+            $specs = $controller->getSpecificationsValuesCntroller($id_vehicule);
             ?>
             <main>
-                
+                <h1 class="vehicule_title"><?php echo $vehicule[0]["make_name"]?> <?php echo $vehicule[0]["model_name"]?> <?php echo $vehicule[0]["generation_name"]?> [<?php echo $vehicule[0]["year_begin"]?>-<?php echo $vehicule[0]["year_end"]?>] <?php echo $vehicule[0]["year_name"]?></h1>
+                <img class="" src="/Car-comparison-website/assets/vehicules/<?php echo $vehicule[0]["model_name"];?> <?php echo $vehicule[0]["generation_name"];?> <?php echo $vehicule[0]["year_begin"];?> <?php echo $vehicule[0]["year_end"];?> <?php echo $vehicule[0]["year_name"];?>" alt="make logo">
+                <div>
+                    <h2>Vehicule specifications</h2>
+                    <p>Check out this vehicules specifications</p>
+                </div>
+                <section class="spec all-spec">
+            <?php
+            foreach($specs as $spec){
+                ?>
+                <div class="specification">
+                    <h4><?php echo $spec["specification_name"] ?></h4>
+                    <p><span><?php echo $spec["value"] ?></span><span><?php echo $spec["unit"] ?></span></p>
+                    <hr>
+                </div>
+                <?php
+            }
+            ?>    
+                </section>
             </main>
             <?php
         }

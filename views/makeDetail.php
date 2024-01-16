@@ -10,7 +10,7 @@ class MakeDetail{
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <!-- <script src="https://kit.fontawesome.com/7c073a6778.js" crossorigin="anonymous"></script> -->
+            <script src="https://kit.fontawesome.com/7c073a6778.js" crossorigin="anonymous"></script>
             <link rel="stylesheet" href="/Car-comparison-website/index.css">
             <link rel="preconnect" href="https://fonts.googleapis.com">
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,6 +26,7 @@ class MakeDetail{
             $makesController = new  makeDetailController();
             $info = $makesController-> getMakeinfoController($id_make);
             $vehicules = $makesController->getPrincipleVehiculesOfMakeController($id_make);
+            $all_vehicules = $makesController->getVehiculesOfMakeController($id_make);
             ?>
             <main>
                 <div class="make-display-large">
@@ -37,13 +38,31 @@ class MakeDetail{
                 </div>
                 <div class="make-models">
                     <div class="principle-models">
+                        <div>
+                            <h2>Appreciated vehicules</h2>
+                            <p>Check out these loved vehicules</p>
+                        </div>
                         <ul>
                             <?php 
                             foreach($vehicules as $vehicule){
                                 ?>
                                 <div class="model-display-average">
-                                    <li><?php echo $vehicule["model_name"]?></li>
+                                    <li><?php echo $vehicule["make_name"]?> <?php echo $vehicule["model_name"]?> <?php echo $vehicule["generation_name"]?> [<?php echo $vehicule["year_begin"]?>-<?php echo $vehicule["year_end"]?>] <?php echo $vehicule["year_name"]?></li>
                                     <a href="/Car-comparison-website/makes/vehiculeDetail?id_vehicule=<?php echo $vehicule["id_vehicule"]?>"><img class="make-average-img" src="/Car-comparison-website/assets/model/<?php echo $vehicule["model_name"]?>" alt="make logo"></a>
+                                </div>
+                                <?php
+                            }
+                            ?>
+                        </ul>
+                    </div>
+                    <div>
+                        <h2>All vehicules of <?php echo $vehicule["make_name"]?></h2>
+                        <ul>
+                        <?php 
+                            foreach($all_vehicules as $vehicule){
+                                ?>
+                                <div class="">
+                                <li><a href="/Car-comparison-website/makes/vehiculeDetail?id_vehicule=<?php echo $vehicule["id_vehicule"]?>" style="text-decoration:underline"><?php echo $vehicule["make_name"]?> <?php echo $vehicule["model_name"]?> <?php echo $vehicule["generation_name"]?> [<?php echo $vehicule["year_begin"]?>-<?php echo $vehicule["year_end"]?>] <?php echo $vehicule["year_name"]?></a></li>
                                 </div>
                                 <?php
                             }

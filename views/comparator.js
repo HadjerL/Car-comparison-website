@@ -6,7 +6,7 @@ $(function(){
         console.log(data.vehiclechar.type);
         $.get('/Car-comparison-website/views/components/comparison.php', {data: data})
         .done(function(data) {
-            $(`#result`).append(`<h1>${data}</h1>`);
+            $(`#result`).append(`<div>${data}</div>`);
         })
         .fail(function(jqxhr, textStatus, error) {
             var err = textStatus + ", " + error;

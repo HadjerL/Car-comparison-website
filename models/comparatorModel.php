@@ -53,7 +53,7 @@ class ComparatorModel extends Model{
     }
     public function getSpecificationsValues($id_vehicule){
         $conn = $this-> connect($this->getDbName(), $this->getHost(), $this->getUser(), $this->getPassword());
-        $query = "SELECT id_specification_value,id_vehicule, specification_name, value, unit FROM `specification` s JOIN `specification_value`sv on s.id_specification = sv.id_specification where id_vehicule = $id_vehicule";
+        $query = "SELECT id_specification_value,id_vehicule, specification_name, value, unit FROM `specification` s JOIN `specification_value`sv on s.id_specification = sv.id_specification where id_vehicule = $id_vehicule and sv.deleted = \"no\" and s.deleted = \"no\"";
         $result = $this->request($conn, $query);
         $this->disconect($conn);
         return $result;

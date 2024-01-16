@@ -8,6 +8,11 @@ class makeDetailController{
         $result = $info->getMakeinfo($id_make);
         return $result;
     }
+    public function getVehiculesOfMakeController($id_make){
+        $makes = new MakesModel();
+        $result = $makes->getVehiculesOfMake($id_make);
+        return $result;
+    }
     public function getPrincipleVehiculesOfMakeController($id_make){
         $makes = new MakesModel();
         $result = $makes->getPrincipleVehiculesOfMake($id_make);

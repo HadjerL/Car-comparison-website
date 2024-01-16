@@ -350,7 +350,7 @@ div.principle-models ul{
     font-size: 2rem;
     font-weight: bold;
 }
-main{
+main,div.make-models,div.principle-models{
     display: flex;
     flex-direction: column;
     gap: 4rem;
@@ -369,6 +369,42 @@ div.model-display-average img.make-average-img{
     height: 200px;
     object-fit: cover;
 }
+section.result{
+    gap: 3rem;
+}
+section.all-spec{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+}
+section.spec{
+    gap: 1rem
+}
+h1.vehicule_title{
+    font-size: 2.5rem;
+    text-align: center;
+}
+div.specification h4{
+    margin-bottom: 5px;
+}
+div.specification p{
+    display: flex;
+    gap: 8px
+}
+
+div.vehicule-result{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+div.vehicule-result h3{
+    font-size: 1.5rem;
+}
+div.vehicule-result img{
+    max-width: 400px;
+    max-height: 300px;
+    object-fit: cover;
+}
+
 
 @keyframes fade {
     0% {

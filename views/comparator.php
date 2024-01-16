@@ -10,7 +10,7 @@ class Comparator{
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <!-- <script src="https://kit.fontawesome.com/7c073a6778.js" crossorigin="anonymous"></script> -->
+            <script src="https://kit.fontawesome.com/7c073a6778.js" crossorigin="anonymous"></script>
             <link rel="stylesheet" href="/Car-comparison-website/index.css">
             <link rel="preconnect" href="https://fonts.googleapis.com">
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,7 +22,9 @@ class Comparator{
     }
     private function showResult(){
         ?>
-        <section class="result" id="result"></section>
+        <section class="result all-spec" id="result">
+
+        </section>
         <?php
     }
     private function showMain(){
@@ -38,10 +40,9 @@ class Comparator{
         $this->showMain();
         $common->showFooter();
         ?>
-        <img class="compr-img" src="assets/cars/BMW-2-Series_13_17_15.jpg" alt="vehicule imgae">
         <script src="jquery-3.7.1.js" type="text/javascript"></script>
         <script src="/Car-comparison-website/views/components/compare.js" type="text/javascript"></script>
-        <script src="/Car-comparison-website/views/comparatour.js" type="text/javascript"></script>
+        <script src="/Car-comparison-website/views/comparator.js" type="text/javascript"></script>
         </body>
         <?php
     }
