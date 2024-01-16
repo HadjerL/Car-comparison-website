@@ -1,28 +1,4 @@
 $(function(){
-    $('header button').on('click',()=>{
-        $('header button svg.open-menu')[0].classList.toggle('hidden');
-        $('header button svg.closed-menu')[0].classList.toggle('hidden');
-        $('nav')[0].classList.toggle('hidden');
-    })
-    let slideIndex = 0;
-    showSlides();
-    
-    function showSlides() {
-        let i;
-        let slides = $(".slide");
-        let dots = $(".circle");
-        for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-            dots[i].classList.remove("active");
-        }
-        slideIndex++;
-        if (slideIndex > slides.length) {slideIndex = 1}
-        if (slideIndex < 1) {slideIndex = slides.length}
-        slides[slideIndex-1].style.display = "block";
-        dots[slideIndex-1].classList.add("active");
-        setTimeout(showSlides, 2000);
-    }
-
     function updateMakes(formId) {
         const type = $(`#${formId} select[name^="type"]`).val();
         const makeSelect = $(`select[name^="make"]`);
@@ -180,7 +156,7 @@ $(function(){
     updateYears("vehicule-form2");
     updateYears("vehicule-form3");
 
-    function updateImages(formId,formBoxId) {
+    async function updateImages(formId,formBoxId) {
         const year = $(`#${formId} select[name^="year"]`).val();
         const generationval = $(`#${formId} select[name^="generation"]`).val();
         const model = $(`#${formId} select[name^="model"]`).val();
@@ -196,12 +172,17 @@ $(function(){
         $.getJSON('./controller/ajaxController.php', { action: 'getImageOfVehicule',type_name:type, make_name: make, model_name: model,generation_name: generation, year_begin: yearBegin, year_end: yearEnd, year_name: year})
         .done(function(data) {
             if(data.length != 0){
-                console.log(data[0].path);
-                imageDiv.empty().append(`<img class="compr-img" src="${data[0].path}">`);
-                
+                console.log('Data Length:', data.length);
+                console.log(imageDiv)
+                data.forEach(function(item) {
+                    formId.charAt(0)
+                    sessionStorage.setItem(`vehiculePath${formId.charAt(formId.length - 1)}`, JSON.stringify(item.path));
+                    console.log('Image Path:', item.path);
+                    imageDiv.append(`<img class="compr-img" src="${item.path}" alt="vehicle image">`);
+                });
             } else{
-                console.log('d5alt')
-                imageDiv.append(`<img class="compr-img" src="${car_figures[0]}">`);
+                imageDiv.append(`<img class="compr-img" src="${car_figures[0]}" alt="vehicule image">`);
+                // console.log('d5alt')
             }
         })
         .fail(function(jqxhr, textStatus, error) {
@@ -293,6 +274,7 @@ $(function(){
             return true;
         }
     }
+
     function compare(){
         const filledForms = getFilledForms();
         const allCombinations = getFormCombinations(filledForms);
@@ -307,28 +289,29 @@ $(function(){
                     'border':'var(--red) 2px solid'
                 })
             } else{
-                filledForms.forEach((form)=>{
+                filledForms.forEach(async(form)=>{
                     const data = getData(form);
+                    sessionStorage.setItem(`formData${form}`, JSON.stringify(data));
                     data.action = 'getVehicule';
-                    $.getJSON('./controller/formController.php', data)
-                    .done(function(data) {
-                        if(data.length != 0){
-                            data.unshift({form : form});
-                            console.log(data);
+                    try{
+                        const response  = await $.getJSON('./controller/formController.php', data);
+                        if(response.length != 0){
+                            // response.unshift({form : form});
+                            sessionStorage.setItem(`comparitionData${form}`, JSON.stringify(response));
+                            sessionStorage.setItem(`filledForms`, JSON.stringify(filledForms));
                         } else{
                             console.log('no data')
                         }
-                    })
-                    .fail(function(jqxhr, textStatus, error) {
-                        var err = textStatus + ", " + error;
-                        console.error("Request Failed: " + err);
-                    });
+                    } catch(error){
+                        console.log('Request Failed:', error);
+                    }
                 })
+                window.location.href = '/Car-comparison-website/comparator';
             }
         })
     }
     $(`section.comparison button`).on("click",compare)
-
+    console.log('jdljld')
 })    
 
 

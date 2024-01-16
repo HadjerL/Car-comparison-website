@@ -4,13 +4,15 @@ $routes = [
     '/Car-comparison-website/news' => 'newsController@showPage',            // Home page route
     '/Car-comparison-website/comparator' => 'comparatorController@showPage',   // Contact page route
     '/Car-comparison-website/makes' => 'makesController@showPage',   // Contact page route
+    '/Car-comparison-website/makes/makeDetail' => 'makeDetailController@showPage',   // Contact page route
+    '/Car-comparison-website/makes/vehiculeDetail' => 'vehiculeDetailController@showPage',   // Contact page route
     '/Car-comparison-website/reviews' => 'reviewsController@showPage',   // Contact page route
     '/Car-comparison-website/buying-guide' => 'buyingGuideController@showPage',   // Contact page route
     '/Car-comparison-website/contact' => 'contactController@showPage',   // Contact page route
 ];
 
 // Get the current URL path
-$path = $_SERVER['REQUEST_URI'];
+$path = strtok($_SERVER['REQUEST_URI'], '?');
 
 if (array_key_exists($path, $routes)) {
     $routeParts = explode('@', $routes[$path]);

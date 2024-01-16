@@ -10,7 +10,7 @@ class Review{
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <script src="https://kit.fontawesome.com/7c073a6778.js" crossorigin="anonymous"></script>
-            <link rel="stylesheet" href="styles.css">
+            <link rel="stylesheet" href="/Car-comparison-website/index.css">
             <link rel="preconnect" href="https://fonts.googleapis.com">
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
             <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet">

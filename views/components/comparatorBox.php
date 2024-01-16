@@ -9,7 +9,7 @@ function showComparingFrame(){
         // $id_vehicule = $comparator_controller -> getVehiculeController("Car","BMW","2 serie","F22/F23",2013,2017,2015);
         // echo $id_vehicule[0]["id_vehicule"];
         ?>
-        <section class="comparison">
+        <section class="comparison" id="comparator">
             <header class="header-compare">
                 <h2 class="section-title">Car comparator</h2>
                 <p>Choose at least two cars to compare side-by-side.</p>
