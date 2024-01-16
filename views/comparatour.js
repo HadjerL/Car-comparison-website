@@ -27,6 +27,7 @@ $(function(){
                             spec:JSON.parse(data)
                         }
                         displayResult(vehiculeInfo);
+                        // sessionStorage.clear();
                     } else {
                         reject(new Error('Form data not found in session storage'));
                     }
@@ -37,4 +38,5 @@ $(function(){
         }
     }
     displayFormData();
+    console.log('gjjjjgj');
 })    

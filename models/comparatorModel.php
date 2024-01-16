@@ -11,7 +11,7 @@ class ComparatorModel extends Model{
     }
     public function getMakesOfType($vehicule_type){
         $conn = $this-> connect($this->getDbName(), $this->getHost(), $this->getUser(), $this->getPassword());
-        $query = "SELECT make_name from (SELECT id_make from (SELECT `id_vehicule_type` FROM `vehicule_type` WHERE type_name = \"$vehicule_type\") vt JOIN vehicule v on vt.id_vehicule_type = v.id_vehicule_type) im JOIN make m on im.id_make = m.id_make";
+        $query = "SELECT distinct make_name from (SELECT id_make from (SELECT `id_vehicule_type` FROM `vehicule_type` WHERE type_name = \"$vehicule_type\") vt JOIN vehicule v on vt.id_vehicule_type = v.id_vehicule_type) im JOIN make m on im.id_make = m.id_make";
         $result = $this->request($conn, $query);
         $this->disconect($conn);
         return $result;

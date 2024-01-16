@@ -44,6 +44,13 @@ class MakesModel extends Model{
         $this->disconect($conn);
         return $result; 
     }
+    public function getPrincipleCommentsOfMake($id_make){
+        $conn = $this-> connect($this->getDbName(), $this->getHost(), $this->getUser(), $this->getPassword());
+        $query = "SELECT id_comment,id_make, comment,username,date_create from (SELECT id_comment,id_make, comment,id_user,date_create from ( SELECT id_comment as commentid , AVG(rating) as average_rating FROM ratingcomment_make GROUP BY id_comment) r join comment_make m on r.commentid = m.id_comment WHERE id_make = $id_make) c join users u on c.id_user = u.id_user LIMIT 3";
+        $result = $this->request($conn, $query);
+        $this->disconect($conn);
+        return $result; 
+    }
 }
 ?>
 

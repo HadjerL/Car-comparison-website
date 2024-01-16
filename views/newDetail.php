@@ -1,8 +1,9 @@
 <?php
 require_once(__DIR__ . '/../controller/controller.php');
-require_once(__DIR__ . '/../controller/newsController.php');
+require_once(__DIR__ . '/../controller/newDetailController.php');
+require_once(__DIR__ . '/../controller/comparatorController.php');
 require_once(__DIR__.'/common.php');
-class News{
+class NewDetail{
     private function pageHead(){
         $page_controller = new Controller();
         $logo_link = $page_controller->getLogoController("black and orange");
@@ -21,26 +22,18 @@ class News{
         <?php
     }
     private function showMain(){
-        $news_controller = new newsController();
-        $news = $news_controller->getNews();
-        ?>
-        <main>
-            <h2>Latest news</h2>
-            <section class="news">
-        <?php
-        foreach($news as $new){
+        if(isset($_GET["id_new"])){
+            $new_controller = new newDetailController();
+            $id_new = $_GET["id_new"];
+            $new = $new_controller->getNewController($id_new);
             ?>
-            <div>
-                <a href="/Car-comparison-website/news/newDetail?id_new=<?php echo $new["id_new"]?>"><img class="userimage" src="/Car-comparison-website/assets/new/<?php echo $new["title"]?>" alt="make logo"></a>
-                <h5><?php echo $new["title"]?></h5>
-            </div>
-            <h2></h2>
+            <main class="news-article">
+                <h1><?php echo $new[0]["title"]?></h1>
+                <img class="" src="/Car-comparison-website/assets/new/<?php echo $new[0]["title"];?>" alt="make logo">
+                <p><?php echo $new[0]["content"] ?></p>
+            </main>
             <?php
         }
-        ?>
-        </section>
-        </main>
-        <?php
     }
     private function pageBody(){
         $common = new common();
@@ -49,7 +42,7 @@ class News{
         $this->showMain();
         $common->showFooter();
         ?>
-        <script src="jquery-3.7.1.js" type="text/javascript"></script>
+        <script src="/Car-comparison-website/jquery-3.7.1.js" type="text/javascript"></script>
         <!-- <script src="index.js" type="text/javascript"></script> -->
         </body>
         <?php

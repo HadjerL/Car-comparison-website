@@ -18,6 +18,11 @@ class makeDetailController{
         $result = $makes->getPrincipleVehiculesOfMake($id_make);
         return $result;
     }
+    public function getPrincipleCommentsOfMakeController($id_make){
+        $makes = new MakesModel();
+        $result = $makes->getPrincipleCommentsOfMake($id_make);
+        return $result;
+    }
     public function showPage(){
         $page_view = new MakeDetail();
         return $page_view->showPage();

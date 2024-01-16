@@ -10,7 +10,7 @@ class Comparator{
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <script src="https://kit.fontawesome.com/7c073a6778.js" crossorigin="anonymous"></script>
+            <!-- <script src="https://kit.fontawesome.com/7c073a6778.js" crossorigin="anonymous"></script> -->
             <link rel="stylesheet" href="/Car-comparison-website/index.css">
             <link rel="preconnect" href="https://fonts.googleapis.com">
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,9 +40,10 @@ class Comparator{
         $this->showMain();
         $common->showFooter();
         ?>
+        <img src="assets/vehicules/Audi A3 4 generation (8Y) 2020 2023 2020" alt="">
         <script src="jquery-3.7.1.js" type="text/javascript"></script>
         <script src="/Car-comparison-website/views/components/compare.js" type="text/javascript"></script>
-        <script src="/Car-comparison-website/views/comparator.js" type="text/javascript"></script>
+        <script src="/Car-comparison-website/views/comparatour.js" type="text/javascript"></script>
         </body>
         <?php
     }

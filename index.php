@@ -6,6 +6,7 @@ $routes = [
     '/Car-comparison-website/makes' => 'makesController@showPage',   // Contact page route
     '/Car-comparison-website/makes/makeDetail' => 'makeDetailController@showPage',   // Contact page route
     '/Car-comparison-website/makes/vehiculeDetail' => 'vehiculeDetailController@showPage',   // Contact page route
+    '/Car-comparison-website/news/newDetail' => 'newDetailController@showPage',   // Contact page route
     '/Car-comparison-website/reviews' => 'reviewsController@showPage',   // Contact page route
     '/Car-comparison-website/buying-guide' => 'buyingGuideController@showPage',   // Contact page route
     '/Car-comparison-website/contact' => 'contactController@showPage',   // Contact page route

@@ -11,7 +11,9 @@ if (isset($_GET['data'])) {
     <div class="vehicule-result">
     <h3><?php echo $make." ".$model." ".$generation." [".$yearBegin."-".$yearEnd."] ".$year;?></h3>
     <div>
-        <img class="v-result-img" src="/Car-comparison-website/assets/vehicules/<?php echo $model;?> <?php echo $generation;?> <?php echo $yearBegin;?> <?php echo $yearEnd;?> <?php echo $year;?>" alt="make logo">
+        <div>
+            <img class="v-result-img" src="/Car-comparison-website/assets/vehicules/<?php echo $model;?> <?php echo $generation;?> <?php echo $yearBegin;?> <?php echo $yearEnd;?> <?php echo $year;?>" alt="vehicule">
+        </div>
     </div>
     <?php
     $dataArray = $_GET['data']["spec"];

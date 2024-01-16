@@ -1,3 +1,4 @@
+<!-- here we print the most appreciated -->
 <?php
 require_once(__DIR__ . '/../controller/controller.php');
 require_once(__DIR__ . '/../controller/makeDetailController.php');
@@ -27,6 +28,7 @@ class MakeDetail{
             $info = $makesController-> getMakeinfoController($id_make);
             $vehicules = $makesController->getPrincipleVehiculesOfMakeController($id_make);
             $all_vehicules = $makesController->getVehiculesOfMakeController($id_make);
+            $comments = $makesController->getPrincipleCommentsOfMakeController($id_make);
             ?>
             <main>
                 <div class="make-display-large">
@@ -37,38 +39,71 @@ class MakeDetail{
                     <a><img class="make-average-img" src="/Car-comparison-website/assets/makes/<?php echo $info[0]["make_name"];?>.png" alt="make logo"></a>
                 </div>
                 <div class="make-models">
-                    <div class="principle-models">
-                        <div>
-                            <h2>Appreciated vehicules</h2>
-                            <p>Check out these loved vehicules</p>
+                    <?php 
+                        if (count($all_vehicules) != 0 ){
+                            ?>
+                        <div class="principle-models">
+                            <div>
+                                <h2>Appreciated vehicules</h2>
+                                <p>Check out these loved vehicules</p>
+                            </div>
+                            <ul>
+                                <?php 
+                                foreach($vehicules as $vehicule){
+                                    ?>
+                                    <div class="model-display-average">
+                                        <li><?php echo $vehicule["make_name"]?> <?php echo $vehicule["model_name"]?> <?php echo $vehicule["generation_name"]?> [<?php echo $vehicule["year_begin"]?>-<?php echo $vehicule["year_end"]?>] <?php echo $vehicule["year_name"]?></li>
+                                        <a href="/Car-comparison-website/makes/vehiculeDetail?id_vehicule=<?php echo $vehicule["id_vehicule"]?>"><img class="make-average-img" src="/Car-comparison-website/assets/model/<?php echo $vehicule["model_name"]?>" alt="make logo"></a>
+                                    </div>
+                                    <?php
+                                }
+                                ?>
+                            </ul>
                         </div>
-                        <ul>
-                            <?php 
-                            foreach($vehicules as $vehicule){
-                                ?>
-                                <div class="model-display-average">
-                                    <li><?php echo $vehicule["make_name"]?> <?php echo $vehicule["model_name"]?> <?php echo $vehicule["generation_name"]?> [<?php echo $vehicule["year_begin"]?>-<?php echo $vehicule["year_end"]?>] <?php echo $vehicule["year_name"]?></li>
-                                    <a href="/Car-comparison-website/makes/vehiculeDetail?id_vehicule=<?php echo $vehicule["id_vehicule"]?>"><img class="make-average-img" src="/Car-comparison-website/assets/model/<?php echo $vehicule["model_name"]?>" alt="make logo"></a>
-                                </div>
-                                <?php
-                            }
+                            <?php
+                        }else{
                             ?>
-                        </ul>
-                    </div>
+                            <p>no ratings yet^^</p>
+                            <?php
+                        }
+                        ?>
                     <div>
-                        <h2>All vehicules of <?php echo $vehicule["make_name"]?></h2>
-                        <ul>
+                        
                         <?php 
-                            foreach($all_vehicules as $vehicule){
+                        if (count($all_vehicules) != 0 ){
+                        ?>
+                            <h2>All vehicules of <?php echo $all_vehicules[0]["make_name"]?></h2>
+                            <ul>
+                            <?php 
+                                foreach($all_vehicules as $vehicule){
+                                    ?>
+                                    <div class="">
+                                    <li><a href="/Car-comparison-website/makes/vehiculeDetail?id_vehicule=<?php echo $vehicule["id_vehicule"]?>" style="text-decoration:underline"><?php echo $vehicule["make_name"]?> <?php echo $vehicule["model_name"]?> <?php echo $vehicule["generation_name"]?> [<?php echo $vehicule["year_begin"]?>-<?php echo $vehicule["year_end"]?>] <?php echo $vehicule["year_name"]?></a></li>
+                                    </div>
+                                    <?php
+                                }
                                 ?>
-                                <div class="">
-                                <li><a href="/Car-comparison-website/makes/vehiculeDetail?id_vehicule=<?php echo $vehicule["id_vehicule"]?>" style="text-decoration:underline"><?php echo $vehicule["make_name"]?> <?php echo $vehicule["model_name"]?> <?php echo $vehicule["generation_name"]?> [<?php echo $vehicule["year_begin"]?>-<?php echo $vehicule["year_end"]?>] <?php echo $vehicule["year_name"]?></a></li>
-                                </div>
-                                <?php
-                            }
-                            ?>
-                        </ul>
+                            </ul>
+                        <?php 
+                        }
+                        ?> 
                     </div>
+                </div>
+                <div>
+                    <h2>See What people think of this make</h2>
+                    <?php 
+                        foreach($comments as $comment){
+                            ?>
+                            <div class="comment">
+                                <div class="username-image">
+                                    <img class="userimage" src="/Car-comparison-website/assets/users/defaultuser" alt="make logo">
+                                    <p class="username"><?php echo $comment["username"]?></p>
+                                </div>
+                                <p class="commentcontent"><?php echo $comment["comment"]?></p>
+                            </div>
+                            <?php
+                        }
+                        ?>
                 </div>
             </main>
             <?php
